@@ -4,7 +4,8 @@ time.sleep(1) # As i said it is too impatient and so if this delay is removed yo
 
 # This block situationally decides whether the program is running on a Rasberry Pi
 # If not, the program runs with no Pi outputs
-try:
+raspberry = True
+"""try:
     import pigpio #importing GPIO library
 except(ModuleNotFoundError):
     print("ALERT: you are not running this program on a Raspberry Pi. Initiating debug mode.")
@@ -12,7 +13,10 @@ except(ModuleNotFoundError):
     raspberry = False
 else:
     os.system ("sudo pigpiod") #Launching GPIO library
-    raspberry = True
+    raspberry = True"""
+
+os.system("sudo pigpiod")
+import pigpio
     
 ESC=4  #Connect the ESC in this GPIO pin 
 
