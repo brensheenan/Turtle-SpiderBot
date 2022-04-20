@@ -1,6 +1,7 @@
 from inputs import get_gamepad
 import math
 import threading
+from time import sleep
 
 class XboxController(object):
     MAX_TRIG_VAL = math.pow(2, 8)
@@ -93,3 +94,4 @@ if __name__ == '__main__':
     joy = XboxController()
     while True:
         print(joy.read())
+        sleep(0.1)

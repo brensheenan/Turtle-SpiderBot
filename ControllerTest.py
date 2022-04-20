@@ -1,7 +1,3 @@
-from inputs import devices, get_gamepad
+import bluepy
 
-from inputs import get_gamepad
-while 1:
-    events = get_gamepad()
-    for event in events:
-        print(event.ev_type, event.code, event.state)
+controller = bluepy.btle.Peripheral("C8:3F:26:6E:C8:2A")
