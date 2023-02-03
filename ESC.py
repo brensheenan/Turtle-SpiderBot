@@ -12,7 +12,7 @@ print("1 - Calibrate")
 print("2 - Arm")
 print("3 - Test")
 print("4 - Help")
-print("5 - Quit")
+print("q - Quit")
 
 loop_bool = True
 while loop_bool:
@@ -26,7 +26,7 @@ while loop_bool:
     elif inp == "4":
         help()
         pass # To do: create help function
-    elif inp == "5":
+    elif inp == "q":
         print("Goodbye")
         loop_bool = False
     else :

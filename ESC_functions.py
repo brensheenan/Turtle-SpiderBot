@@ -1,24 +1,28 @@
-import os     #importing os library so as to communicate with the system
-import time   #importing time library to make Rpi wait because its too impatient 
-time.sleep(1) # As i said it is too impatient and so if this delay is removed you will get an error
+import os     # importing os library so as to communicate with the system
+import time   # Sleep is needed so that program does not outrun ESC
+time.sleep(1)
 
 # This block situationally decides whether the program is running on a Rasberry Pi
 # If not, the program runs with no Pi outputs
-raspberry = True
-"""try:
+
+
+try:
     import pigpio #importing GPIO library
 except(ModuleNotFoundError):
     print("ALERT: you are not running this program on a Raspberry Pi. Initiating debug mode.")
-    print("In this mode, nothing will be output to a Raspberry Pi.")
+    print("In this mode, nothing will be output to a Raspberry Pi.\n")
     raspberry = False
 else:
     os.system ("sudo pigpiod") #Launching GPIO library
-    raspberry = True"""
+    raspberry = True
 
-os.system("sudo pigpiod")
-import pigpio
-    
-ESC=4  #Connect the ESC in this GPIO pin 
+
+# Placeholder until above block works properly:
+#import pigpio
+#os.system ("sudo pigpiod")
+#raspberry = True
+
+ESC = 4  #Connect the ESC in this GPIO pin
 
 if raspberry:
     pi = pigpio.pi()
@@ -65,15 +69,22 @@ def test(min_value, max_value):
         if raspberry: pi.set_servo_pulsewidth(ESC, speed)
         print("\nspeed = ", speed)
         inp = input("Input command: ")
+
+        # Smooth Speed Control
+        n = 10 # Subdivisions for smooth scaling
         
         if inp == "a":
-            speed -= 100
+            for i in range(n):
+                speed -= 100/n
+                time.sleep(1.0/n)
         elif inp == "s":
             speed -= 10
         elif inp == "d":
             speed += 10
         elif inp == "f":    
-            speed += 100
+            for i in range(n):
+                speed += 100/n
+                time.sleep(1.0/n)
         elif inp == "q":
             speed = min_value
             print("\nspeed = ", speed) 
